@@ -1,0 +1,30 @@
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS resouces;
+DROP TABLE IF EXISTS tags;
+DROP TABLE IF EXISTS map_resource_tag;
+
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL,
+    password TEXT NOT NULL
+);
+
+CREATE TABLE resources (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    url TEXT
+);
+
+CREATE TABLE tags (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    type TEXT
+);
+
+CREATE TABLE map_resource_tag (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    resource_id INTEGER NOT NULL,
+    tag_id INTEGER NOT NULL,
+    FOREIGN KEY (resource_id) REFERENCES resources (id),
+    FOREIGN KEY (tag_id) REFERENCES tags (id)
+);
