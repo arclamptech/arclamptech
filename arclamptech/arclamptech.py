@@ -15,4 +15,8 @@ def resources():
 
 @bp.route('/reveal')
 def reval():
-    return jsonify({'ip': request.remote_addr}), 200
+    if request.headers.getlist("X-Forwarded-For"):
+        ip = request.headers.getlist("X-Forwarded-For")[0]
+    else:
+        ip = request.remote_addr
+    return jsonify({'ip': ip}), 200
