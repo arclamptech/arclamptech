@@ -16,4 +16,7 @@ def create_app():
     from . import arclamptech
     app.register_blueprint(arclamptech.bp)
 
+    from . import api
+    app.register_blueprint(api.bp)
+
     return app
