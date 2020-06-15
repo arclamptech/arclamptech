@@ -6,6 +6,13 @@ def create_app():
 
     app.config['SERVER_NAME'] = 'arclamptech.org'
 
+
+    # for key, val in os.environ.items(): print(key, val)
+    # if os.environ.get('PYTHONHOME'):  # checks if deployed
+    #     app.config['SERVER_NAME'] = 'arclamptech.org'
+    if os.environ.get('FLASK_ENV'): # check if local/not deployed
+        app.config['SERVER_NAME'] += ":5000"
+
     try:
         os.makedirs(app.instance_path)
     except OSError:
@@ -14,7 +21,7 @@ def create_app():
     @app.route('/hello')
     def hello():
         return 'Hello, World!'
-    
+
     from . import arclamptech
     app.register_blueprint(arclamptech.bp)
 
