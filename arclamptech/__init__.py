@@ -7,7 +7,7 @@ def create_app():
     app.config['SERVER_NAME'] = 'arclamptech.org'
 
     # for key, val in os.environ.items(): print(key, val)
-    if not os.environ.get('PYTHONHOME'):  # checks if deployed
+    if os.environ.get('FLASK_ENV') == 'development':  # checks if not deployed
         app.config['SERVER_NAME'] += ":5000"
 
     try:
